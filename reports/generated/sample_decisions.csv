@@ -1,0 +1,10 @@
+notice_pid,notice_date,county,work_status,class_status,period,stopped_score,raw_text,source_url
+7004,2001-07-30,基隆市,stopped,stopped,full_day,1.0,今天停止辦公、停止上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004
+7004,2001-07-30,臺北市,stopped,stopped,full_day,1.0,今天停止辦公、停止上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004
+7004,2001-07-30,新北市(改制前臺北縣),stopped,stopped,full_day,1.0,今天停止辦公、停止上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004
+7004,2001-07-30,桃園縣,stopped,stopped,full_day,1.0,今天停止辦公、停止上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004
+7004,2001-07-30,新竹市,normal,normal,full_day,0.0,今天照常辦公、照常上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004
+7004,2001-07-30,新竹縣,stopped,stopped,afternoon,0.5,今天下午停止辦公、停止上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004
+7004,2001-07-30,臺南市,normal,partial_school,full_day,0.5,今天照常辦公、高中及高中以下停止上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004
+7004,2001-07-30,高雄市,normal,partial_school,full_day,0.5,今天照常辦公、國中以下停止上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004
+7004,2001-07-30,屏東縣,normal,partial_school,full_day,0.5,今天照常辦公、國中以下停止上課。,https://www.dgpa.gov.tw/information?uid=374&pid=7004

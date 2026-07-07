@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "typhoon-day-research"
+version = "0.1.0"
+description = "Reproducible research package for Taiwan typhoon-day decisions."
+authors = ["Codex <codex@example.invalid>"]
+readme = "README.md"
+packages = [{ include = "typhoon_day_research", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"
+
