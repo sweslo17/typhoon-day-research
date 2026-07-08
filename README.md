@@ -26,3 +26,9 @@ PYTHONPATH=src python3 -m typhoon_day_research.cli drafts --out-dir reports/medi
 ```
 
 See `docs/research_brief.md` for source notes, legal criteria, election-timing assumptions, and the article series plan.
+
+Published-writing package:
+
+- Complete Medium-ready article series: `reports/articles/`
+- Earlier short drafts: `reports/medium/`
+- Analysis figures and tables: `reports/analysis/`
