@@ -17,9 +17,9 @@ PYTHONPATH=src python3 -m typhoon_day_research.cli fetch-dgpa --raw-dir data/raw
 PYTHONPATH=src python3 -m typhoon_day_research.cli build-dataset --raw-dir data/raw/dgpa --out data/processed/dgpa_decisions.csv
 PYTHONPATH=src python3 -m typhoon_day_research.cli analyze --decisions-csv data/processed/dgpa_decisions.csv --out-dir reports/analysis
 
-# C. Parse CWA forecast data and run an interpretable probability scenario.
+# C. Parse CWA forecast data and run interpretable probability scenarios.
 PYTHONPATH=src python3 -m typhoon_day_research.cli parse-wpps --input data/raw/cwa/WPPS-Data.js --out data/processed/cwa_wpps_forecast.csv
-PYTHONPATH=src python3 -m typhoon_day_research.cli predict --county 臺北市 --target-date 2026-07-08 --max-gust-mps 28 --mean-wind-mps 15 --rainfall-24h-mm 240 --storm-radius-within-4h
+PYTHONPATH=src python3 -m typhoon_day_research.cli predict-batch --input data/manual/taipei_typhoon_week_scenario.csv --out reports/generated/prediction_week_taipei.json
 
 # B. Render Medium drafts.
 PYTHONPATH=src python3 -m typhoon_day_research.cli drafts --out-dir reports/medium
@@ -32,3 +32,4 @@ Published-writing package:
 - Complete Medium-ready article series: `reports/articles/`
 - Earlier short drafts: `reports/medium/`
 - Analysis figures and tables: `reports/analysis/`
+- Weekly prediction example: `reports/generated/prediction_week_taipei.json`

@@ -8,6 +8,7 @@ from pathlib import Path
 
 from typhoon_day_research.articles.medium import render_medium_series
 from typhoon_day_research.features.elections import Election, load_elections_csv
+from typhoon_day_research.modeling.batch import predict_batch_from_csv
 from typhoon_day_research.modeling.baseline import TyphoonDayBaseline
 from typhoon_day_research.parsers.wpps import parse_wpps_js
 from typhoon_day_research.pipeline import (
@@ -54,6 +55,11 @@ def main(argv: list[str] | None = None) -> int:
     predict.add_argument("--storm-radius-within-4h", action="store_true")
     predict.add_argument("--elections", type=Path, default=Path("data/manual/election_calendar.csv"))
     predict.add_argument("--out", type=Path, default=Path("reports/generated/prediction_cli.json"))
+
+    predict_batch = subparsers.add_parser("predict-batch")
+    predict_batch.add_argument("--input", type=Path, default=Path("data/manual/taipei_typhoon_week_scenario.csv"))
+    predict_batch.add_argument("--elections", type=Path, default=Path("data/manual/election_calendar.csv"))
+    predict_batch.add_argument("--out", type=Path, default=Path("reports/generated/prediction_week_taipei.json"))
 
     drafts = subparsers.add_parser("drafts")
     drafts.add_argument("--out-dir", type=Path, default=Path("reports/medium"))
@@ -107,6 +113,14 @@ def main(argv: list[str] | None = None) -> int:
         )
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(json.dumps(asdict(result), ensure_ascii=False, indent=2, default=str), encoding="utf-8")
+        print(args.out)
+        return 0
+    if args.command == "predict-batch":
+        elections = load_elections_csv(args.elections) if args.elections.exists() else _fallback_elections()
+        model = TyphoonDayBaseline(elections=elections)
+        results = predict_batch_from_csv(args.input, model)
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(json.dumps([asdict(result) for result in results], ensure_ascii=False, indent=2, default=str), encoding="utf-8")
         print(args.out)
         return 0
     if args.command == "drafts":

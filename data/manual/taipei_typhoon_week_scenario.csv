@@ -1,0 +1,5 @@
+county,target_date,max_gust_mps,mean_wind_mps,rainfall_24h_mm,storm_radius_within_4h,scenario_note
+臺北市,2026-07-08,10,5,20,false,颱風仍遠且未進入四小時暴風半徑情境
+臺北市,2026-07-09,18,9,80,false,外圍環流增強但尚未達主要風力門檻
+臺北市,2026-07-10,30,16,260,true,週五最接近且風雨條件達停班停課高風險情境
+臺北市,2026-07-11,22,12,160,false,颱風遠離後仍有殘餘雨勢與陣風風險

@@ -16,6 +16,6 @@
 
 - 完整資料：`../../data/processed/dgpa_decisions.csv`
 - 分析摘要：`../analysis/summary.md`
+- 有趣發現：`../analysis/interesting_findings.md`
 - 選舉時序表：`../analysis/election_timing.md`
-- 預測範例：`../generated/prediction_2026-07-08_taipei_scenario.json`
-
+- 週內預測範例：`../generated/prediction_week_taipei.json`

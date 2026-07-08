@@ -51,43 +51,48 @@ major_election_within_180_days = +0.2
 
 這些權重不是用完整歷史資料訓練出來的參數，而是把法規門檻與研究假說轉成可檢查的初始分數。它的價值是透明，不是準確率保證。
 
-## 範例：2026-07-08 臺北市情境
+## 修正後的範例：不要把週五風雨貼到週三
 
-目前 repo 裡有一個情境範例：
+早版範例有一個嚴重問題：它把高風雨情境直接貼到 2026-07-08 臺北市，導致模型輸出 88.59%。但如果颱風真正最接近的時間是週五，7/8 本身就不該沿用週五的風雨輸入。這不是模型小誤差，而是資料輸入設計錯誤。
 
-```json
-{
-  "county": "臺北市",
-  "target_date": "2026-07-08",
-  "probability": 0.8859,
-  "risk_level": "high",
-  "feature_contributions": {
-    "base": -2.5,
-    "storm_radius_within_4h": 1.0,
-    "mean_wind_ge_7_beaufort": 1.1,
-    "gust_ge_10_beaufort": 1.1,
-    "rainfall_24h_ge_200mm": 0.9,
-    "same_year_local": 0.25,
-    "major_election_within_180_days": 0.2
-  }
-}
-```
+修正後，預測改成週內 batch。每一天都要有自己的風雨情境：
 
-這個情境假設平均風速達七級風門檻、最大陣風達十級風門檻、24 小時雨量 240 毫米，且暴風半徑四小時內可能經過。模型輸出 88.59%，風險等級 high。
+| 日期 | 情境 | 機率 | 風險 |
+| --- | --- | ---: | --- |
+| 2026-07-08 | 颱風仍遠，未進入四小時暴風半徑情境 | 11.41% | low |
+| 2026-07-09 | 外圍環流增強，但尚未達主要風力門檻 | 16.11% | low |
+| 2026-07-10 | 週五最接近，風雨條件達高風險情境 | 88.59% | high |
+| 2026-07-11 | 遠離後仍有殘餘雨勢與陣風 | 35.43% | low |
 
-請注意：這不是 2026-07-08 的真實官方預測。它是示範「如果本週拿到這些風雨輸入，模型會怎麼拆解」。真正要預測本週，必須把最新氣象署 WPPS 預報和颱風警報資訊餵進去。
+這個修正的重點不是宣稱週五一定放，而是把時間維度放回模型。颱風假預測不是問「這個颱風會不會讓台北放假」，而是問「哪一天、哪個縣市、在當時預報風雨下，停止上班上課機率是多少」。
+
+輸出位置：`../generated/prediction_week_taipei.json`
+
+## 舊範例為什麼錯
+
+舊範例把「平均風速達七級風門檻、最大陣風達十級風門檻、24 小時雨量 240 毫米、暴風半徑四小時內可能經過」這組高風險輸入，錯放到 2026-07-08。模型因此輸出 88.59%，風險等級 high。問題不在這個機率本身，而在它被放到 7/8。若 7/8 沒有這些風雨條件，它就不應該高機率。
+
+請注意：這仍然不是官方即時預報。它是示範「如果週五拿到這些風雨輸入，模型會怎麼拆解」。真正要預測本週，必須把最新氣象署 WPPS 預報和颱風警報資訊餵進去，並且逐日更新。
 
 ## 怎麼自己跑
 
-在 repo 根目錄可以跑：
+在 repo 根目錄可以先跑週內 batch：
+
+```bash
+PYTHONPATH=src python3 -m typhoon_day_research.cli predict-batch \
+  --input data/manual/taipei_typhoon_week_scenario.csv \
+  --out reports/generated/prediction_week_taipei.json
+```
+
+如果只想跑單日，請確認該日期的風雨輸入就是那一天的情境。以週五高風險情境為例：
 
 ```bash
 PYTHONPATH=src python3 -m typhoon_day_research.cli predict \
   --county 臺北市 \
-  --target-date 2026-07-08 \
-  --max-gust-mps 28 \
-  --mean-wind-mps 15 \
-  --rainfall-24h-mm 240 \
+  --target-date 2026-07-10 \
+  --max-gust-mps 30 \
+  --mean-wind-mps 16 \
+  --rainfall-24h-mm 260 \
   --storm-radius-within-4h
 ```
 
@@ -133,10 +138,10 @@ PYTHONPATH=src python3 -m typhoon_day_research.cli parse-wpps \
 
 ## 資料與來源
 
-- 預測範例：`../generated/prediction_2026-07-08_taipei_scenario.json`
+- 週內預測範例：`../generated/prediction_week_taipei.json`
+- 週內情境輸入：`../../data/manual/taipei_typhoon_week_scenario.csv`
 - 模型程式：`../../src/typhoon_day_research/modeling/baseline.py`
 - CWA WPPS 解析資料：`../../data/processed/cwa_wpps_forecast.csv`
 - 全國法規資料庫，《天然災害停止上班及上課作業辦法》：https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=S0110022
 - 中央氣象署 WPPS：https://www.cwa.gov.tw/V8/C/P/Typhoon/WPPS.html
 - 中央氣象署 CODiS：https://codis.cwa.gov.tw/StationData
-

@@ -83,12 +83,29 @@ stop_decision ~ forecast_wind + forecast_gust + forecast_rain
 
 這篇文章真正想留下的觀念是：好的統計不是把八卦變成數字，而是把八卦拆成可檢驗的假說。選舉年颱風假不是不能研究，但要尊重時序、控制風雨，還要承認地方政府在災害風險下本來就有合理保守的空間。
 
+## 有趣但危險的補充：高峰年份剛好很多是政治年
+
+停止訊號列數最多的年份包括 2024 年 293 列、2025 年 246 列、2023 年 152 列、2008 年 148 列、2016 年 128 列。這份清單很容易讓人興奮，因為 2008、2016、2024 都和總統選舉週期有關；2023 又是 2024 總統大選前一年。
+
+但這正是統計科普最應該踩煞車的地方。年份高峰不是選舉效果，可能只是那幾年的颱風事件多、影響範圍大、資料附件格式更完整，或某些颱風剛好造成全台性停班停課。例如 2024 年有多個大範圍公告日期，單一事件就能貢獻許多縣市列。
+
+這個段落很適合在 Medium 放一個「誘惑圖」：左邊是年份停止訊號排行，右邊是紅色提示「這不是因果」。好的資料文章不是永遠給讀者爽快答案，有時候是帶讀者感受一下錯誤結論為什麼那麼誘人。
+
+> 圖表插入點：`../analysis/year_top.svg`
+
+## 更好的設計：同一颱風內比較
+
+如果要更接近選舉時序效果，可以挑同一個颱風事件，觀察不同縣市在同一波風雨下的決策。這樣可以部分控制颱風本身的強弱。再進一步，可以比較同一縣市在相似風雨條件下，接近選舉與不接近選舉時的差異。
+
+這種設計還是不能完全消除偏誤，但會比單純比較年份可靠得多。它也更符合社會科學直覺：政治壓力不會憑空創造風雨，它只可能在灰色地帶改變決策者的風險容忍度。
+
 ## 資料與來源
 
 - 本專案選舉時序表：`../analysis/election_timing.csv`
+- 本專案年份與月份發現：`../analysis/interesting_findings.md`
+- 年份高峰圖：`../analysis/year_top.svg`
 - 本專案選舉日曆：`../../data/manual/election_calendar.csv`
 - 行政院人事行政總處公告：https://www.dgpa.gov.tw/informationlist?uid=374
 - 全國法規資料庫，《天然災害停止上班及上課作業辦法》：https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=S0110022
 - Healy, Andrew, and Neil Malhotra. 2009. “Myopic Voters and Natural Disaster Policy.” American Political Science Review.
 - Hosseinkhani, Nima Taheri. 2025. “The Electoral Consequences of Natural Disasters: A Dynamic Fixed-Effects Analysis.” arXiv preprint: https://arxiv.org/abs/2507.14331
-

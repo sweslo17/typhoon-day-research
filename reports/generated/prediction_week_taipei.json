@@ -1,0 +1,58 @@
+[
+  {
+    "county": "臺北市",
+    "target_date": "2026-07-08",
+    "probability": 0.1141,
+    "risk_level": "low",
+    "feature_contributions": {
+      "base": -2.5,
+      "same_year_local": 0.25,
+      "major_election_within_180_days": 0.2
+    },
+    "explanation": "臺北市 on 2026-07-08: estimated typhoon-day probability 11.4% (low). This is an interpretable baseline, not an official forecast."
+  },
+  {
+    "county": "臺北市",
+    "target_date": "2026-07-09",
+    "probability": 0.1611,
+    "risk_level": "low",
+    "feature_contributions": {
+      "base": -2.5,
+      "rainfall_24h_ge_80mm": 0.4,
+      "same_year_local": 0.25,
+      "major_election_within_180_days": 0.2
+    },
+    "explanation": "臺北市 on 2026-07-09: estimated typhoon-day probability 16.1% (low). This is an interpretable baseline, not an official forecast."
+  },
+  {
+    "county": "臺北市",
+    "target_date": "2026-07-10",
+    "probability": 0.8859,
+    "risk_level": "high",
+    "feature_contributions": {
+      "base": -2.5,
+      "storm_radius_within_4h": 1.0,
+      "mean_wind_ge_7_beaufort": 1.1,
+      "gust_ge_10_beaufort": 1.1,
+      "rainfall_24h_ge_200mm": 0.9,
+      "same_year_local": 0.25,
+      "major_election_within_180_days": 0.2
+    },
+    "explanation": "臺北市 on 2026-07-10: estimated typhoon-day probability 88.6% (high). This is an interpretable baseline, not an official forecast."
+  },
+  {
+    "county": "臺北市",
+    "target_date": "2026-07-11",
+    "probability": 0.3543,
+    "risk_level": "low",
+    "feature_contributions": {
+      "base": -2.5,
+      "mean_wind_ge_6_beaufort": 0.45,
+      "gust_ge_9_beaufort": 0.6,
+      "rainfall_24h_ge_80mm": 0.4,
+      "same_year_local": 0.25,
+      "major_election_within_180_days": 0.2
+    },
+    "explanation": "臺北市 on 2026-07-11: estimated typhoon-day probability 35.4% (low). This is an interpretable baseline, not an official forecast."
+  }
+]

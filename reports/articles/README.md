@@ -18,10 +18,13 @@
 ## 圖表與資料
 
 - 縣市停止上班上課排行：`../analysis/stop_count.svg`
+- 月份分布圖：`../analysis/month_distribution.svg`
+- 年份高峰圖：`../analysis/year_top.svg`
 - 人事總處公告解析資料：`../../data/processed/dgpa_decisions.csv`
 - 選舉時序探索統計：`../analysis/election_timing.csv`
+- 資料挖掘出的有趣發現：`../analysis/interesting_findings.md`
 - CWA WPPS 風雨預報解析：`../../data/processed/cwa_wpps_forecast.csv`
-- 範例預測：`../generated/prediction_2026-07-08_taipei_scenario.json`
+- 週內預測範例：`../generated/prediction_week_taipei.json`
 
 ## 發布提醒
 
